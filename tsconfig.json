@@ -1,19 +1,25 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext", "es6"],
+        "outDir": "./dist",
         "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
+        "jsx": "react",
+        "baseUrl": "./src",
+        "paths": {
+            "public/*": ["./public/*"]
+        },
         "module": "esnext",
         "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react"
+        "target": "es2020",
+        "lib": ["es2020", "dom"],
+        "sourceMap": true,
+        "allowUnreachableCode": false,
+        "noImplicitReturns": true,
+        "strict": true,
+        "importHelpers": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true
     },
     "include": ["./src/**/*"]
 }

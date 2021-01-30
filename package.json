@@ -1,22 +1,30 @@
 {
-  "dependencies": {
-    "expo": "~40.0.0",
-    "install": "^0.13.0",
-    "npm": "^6.14.11",
-    "react": "^16.13.1",
-    "react-native-svg": "12.1.0"
-  },
-  "devDependencies": {
-    "@types/react-native": "^0.63.46",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-    "typescript": "~4.0.0"
-  },
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios --simulator='iPhone 8'",
-    "web": "expo web",
-    "eject": "expo eject"
-  },
-  "private": true
+    "name": "wine_frontend_mobile",
+    "version": "1.0.0",
+    "description": "Wine React-Native Frontend",
+    "private": true,
+    "staticFiles": {
+        "staticPath": "public/locales"
+    },
+    "dependencies": {
+        "expo": "~40.0.0",
+        "install": "^0.13.0",
+        "npm": "^6.14.11",
+        "react": "^16.13.1",
+        "react-native-svg": "12.1.0"
+    },
+    "devDependencies": {
+        "@types/react-native": "^0.63.46",
+        "babel-preset-react-native": "^4.0.1",
+        "metro-react-native-babel-preset": "^0.65.0",
+        "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+        "typescript": "~4.0.0"
+    },
+    "scripts": {
+        "start": "expo start",
+        "android": "expo start --android",
+        "ios": "expo start --ios --simulator='iPhone 8'",
+        "web": "expo web",
+        "eject": "expo eject"
+    }
 }
