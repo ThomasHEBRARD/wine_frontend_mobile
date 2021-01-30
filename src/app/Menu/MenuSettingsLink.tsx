@@ -1,16 +1,15 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import SettingsIcon from 'svg/settingsIcon';
 
 const SettingsPage = () => {
     return <SafeAreaView></SafeAreaView>;
 };
 
-export const MenuSettings = () => {
+export const MenuSettingsLink = () => {
     return (
         <View>
-            <Text>fef</Text>
-            <SettingsIcon />
+            <SettingsIcon width={32} height={32} />
         </View>
     );
 };
