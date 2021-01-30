@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import SettingsIcon from 'svg/settingsIcon';
 
 const SettingsPage = () => {
@@ -8,10 +8,10 @@ const SettingsPage = () => {
 
 export const MenuSettings = () => {
     return (
-        <SafeAreaView>
+        <View>
             <Text>fef</Text>
             <SettingsIcon />
-        </SafeAreaView>
+        </View>
     );
 };
 export default SettingsPage;
