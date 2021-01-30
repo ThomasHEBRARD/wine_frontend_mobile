@@ -1,6 +1,7 @@
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
-import SettingsIcon from 'svg/settingsIcon';
+import { SafeAreaView, TouchableHighlight } from 'react-native';
+import { SVG_ICON } from 'svg/enum';
+import SvgIcon from 'svg/svgIcon';
 
 const SettingsPage = () => {
     return <SafeAreaView></SafeAreaView>;
@@ -8,9 +9,9 @@ const SettingsPage = () => {
 
 export const MenuSettingsLink = () => {
     return (
-        <View>
-            <SettingsIcon width={32} height={32} />
-        </View>
+        <TouchableHighlight underlayColor={'red'} onPress={() => undefined}>
+            <SvgIcon icon={SVG_ICON.SETTINGS} />
+        </TouchableHighlight>
     );
 };
 export default SettingsPage;
