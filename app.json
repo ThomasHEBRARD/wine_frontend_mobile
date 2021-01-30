@@ -1,0 +1,7 @@
+{
+    "expo": {
+        "name": "Wine app",
+        "slug": "wine_app",
+        "orientation": "portrait"
+    }
+}
