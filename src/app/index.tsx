@@ -113,7 +113,7 @@ const BottomTabRoute = () => {
             tabBar: TabBar,
         },
         $(Screen, {
-            name: 'SETTINGS',
+            name: 'CELLAR',
             component: MainRoute,
         }),
         $(Screen, {
