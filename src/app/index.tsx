@@ -1,13 +1,16 @@
 import 'react-native-gesture-handler';
 import React, { Suspense, createElement as $ } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { SVG_ICON } from 'svg/enum';
 import MenuLink from './Menu/MenuLink';
 import Settings from './Menu/MenuSettings';
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import Profile from './Menu/MenuProfile';
 import MyCellar from './pages/MyCellar';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import TabBar from './Navigation/TabBar';
+import MyBottles from './pages/MyBottles';
 
 const MyCellarHeader = (props: { navigation: any }) => {
     const { navigation } = props;
@@ -44,25 +47,27 @@ const MyCellarHeader = (props: { navigation: any }) => {
                         icon={SVG_ICON.PROFILE}
                         onClick={() => navigation.navigate('Profile')}
                     />
-                    <MenuLink icon={SVG_ICON.SETTINGS} />
+                    <MenuLink
+                        icon={SVG_ICON.SETTINGS}
+                        onClick={() => navigation.navigate('Settings')}
+                    />
                 </View>
             </View>
         </SafeAreaView>
     );
 };
 
-const Back = (props: { navigation: any }) => {
+const BackArrow = (props: { navigation: any }) => {
     const { navigation } = props;
 
     return (
         <SafeAreaView>
-            <StatusBar barStyle="dark-content" />
-            <MenuLink icon={SVG_ICON.LEFT_ARROW} onClick={() => navigation.navigate('MyCellar')} />
+            <MenuLink icon={SVG_ICON.LEFT_ARROW} onClick={() => navigation.goBack()} />
         </SafeAreaView>
     );
 };
 
-const Routes = () => {
+const MainRoute = () => {
     const { Navigator, Screen } = createStackNavigator();
     return $(
         Navigator,
@@ -71,7 +76,8 @@ const Routes = () => {
             children: <View></View>,
             headerMode: 'screen',
             screenOptions: {
-                cardStyle: { backgroundColor: 'transparent' },
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                cardStyle: { backgroundColor: 'white' },
             },
         },
         $(Screen, {
@@ -80,23 +86,51 @@ const Routes = () => {
             options: { header: MyCellarHeader },
         }),
         $(Screen, {
+            name: 'MyBottles',
+            component: MyBottles,
+            options: { header: BackArrow },
+        }),
+        $(Screen, {
             name: 'Profile',
             component: Profile,
-            options: { header: Back },
+            options: { header: BackArrow },
         }),
         $(Screen, {
             name: 'Settings',
             component: Settings,
+            options: { header: BackArrow },
         })
     );
 };
 
+const BottomTabRoute = () => {
+    const { Navigator, Screen } = createBottomTabNavigator();
+    return $(
+        Navigator,
+        {
+            initialRouteName: 'SETTINGS',
+            children: <View>dzdzdz</View>,
+            tabBar: TabBar,
+        },
+        $(Screen, {
+            name: 'SETTINGS',
+            component: MainRoute,
+        }),
+        $(Screen, {
+            name: 'PROFILE',
+            component: Profile,
+        })
+    );
+};
 export default function Index() {
     return (
-        <NavigationContainer>
+        // TODO: Add Provider, store
+        <NavigationContainer
+            theme={{ ...DefaultTheme, colors: { ...DefaultTheme.colors, background: 'white' } }}
+        >
             {/* <React.StrictMode> */}
             <Suspense fallback={<>Loading</>}>
-                <Routes />
+                <BottomTabRoute />
             </Suspense>
             {/* </React.StrictMode> */}
         </NavigationContainer>

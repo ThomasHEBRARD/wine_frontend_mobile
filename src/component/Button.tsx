@@ -26,7 +26,7 @@ const SubTextSection = (props: { subtext: string }) => {
     return <Text style={subTextStyle.container}>{subtext}</Text>;
 };
 interface ButtonProps {
-    onPress?: () => void;
+    onClick?: () => void;
     needsDouble?: boolean;
     icon: string;
     text: string;
@@ -34,7 +34,7 @@ interface ButtonProps {
 }
 
 const Button = (props: ButtonProps) => {
-    const { onPress, needsDouble, icon, text, subtext } = props;
+    const { onClick, needsDouble, icon, text, subtext } = props;
 
     const style = StyleSheet.create({
         touchable: {
@@ -60,7 +60,7 @@ const Button = (props: ButtonProps) => {
         <TouchableHighlight
             style={style.touchable}
             underlayColor={'#F4F4F4'}
-            onPress={onPress ?? (() => undefined)}
+            onPress={onClick ?? (() => undefined)}
         >
             <>
                 <View style={style.icon}>

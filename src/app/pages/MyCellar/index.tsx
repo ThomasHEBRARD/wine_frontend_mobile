@@ -4,7 +4,8 @@ import Button from 'component/Button';
 import { SVG_ICON } from 'svg/enum';
 import DoubleButton from 'component/DoubleButton';
 
-const MyCellar = () => {
+const MyCellar = (props: { navigation: any }) => {
+    const { navigation } = props;
     return (
         <SafeAreaView>
             <View style={{ height: '5%' }}></View>
@@ -14,6 +15,7 @@ const MyCellar = () => {
                 icon={SVG_ICON.SETTINGS}
                 text={'Mes Bouteilles'}
                 subtext={'Voir toutes mes bouteilles'}
+                onClick={() => navigation.navigate('MyBottles')}
             />
             <View style={{ height: '10%' }}></View>
         </SafeAreaView>
