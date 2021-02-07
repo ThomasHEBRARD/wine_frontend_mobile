@@ -84,11 +84,15 @@ const LoginRoute = () => {
             initialRouteName: 'LOGIN',
             children: <SafeAreaView>children</SafeAreaView>,
             headerMode: 'screen',
-            screenOptions: { headerShown: false },
+            screenOptions: {
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                cardStyle: { backgroundColor: 'white' },
+            },
         },
         $(Screen, {
             name: 'LOGIN',
             component: Login,
+            options: { headerShown: false },
         }),
         $(Screen, {
             name: 'SIGNUP',

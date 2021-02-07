@@ -1,5 +1,5 @@
 import MenuLink from 'app/Menu/MenuLink';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import React from 'react';
 import { SVG_ICON } from 'svg/enum';
 
