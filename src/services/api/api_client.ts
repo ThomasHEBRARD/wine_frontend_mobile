@@ -1,5 +1,5 @@
 import axios from 'axios';
-import logger from '../logger/logger';
+import logger from 'services/logger/logger';
 
 export const getHeaders = (addAuthentication = true) => {
     const header: { [k: string]: string } = {

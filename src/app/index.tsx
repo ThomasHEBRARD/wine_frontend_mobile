@@ -25,6 +25,7 @@ import MyCellar from './pages/MyCellar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBar from './Navigation/TabBar';
 import MyBottles from './pages/MyBottles';
+import loginClient from 'services/api/login';
 
 const MyCellarHeader = (props: { navigation: any }) => {
     const { navigation } = props;
@@ -207,8 +208,8 @@ const Index = () => {
     const authContext = useMemo(
         () => ({
             signIn: async (data: any) => {
-                // In prod, we'll need to send dome data (username, password)
-                // after getting the token, we need to persist the token using AsyncStorage
+                const response = await loginClient.login('thomas.hebrard134@gmail.com', '1234');
+                console.log(response);
                 dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
             },
             signOut: () => dispatch({ type: 'SIGN_OUT' }),
