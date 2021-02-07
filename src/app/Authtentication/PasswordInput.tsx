@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { View } from 'react-native';
 import { TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { SVG_ICON } from 'svg/enum';
 import SvgIcon from 'svg/svgIcon';
@@ -9,21 +10,21 @@ const PasswordInput = (props: { password: string; setPassword: (text: string) =>
     const [security, setSecurity] = useState(true);
 
     return (
-        <>
-            <TextInput
-                autoCompleteType={'off'}
-                autoCorrect={false}
-                secureTextEntry={security}
-                value={password}
-                onChange={(newText: any) => setPassword(newText)}
-            />
-            <TouchableWithoutFeedback
-                style={{ backgroundColor: 'red' }}
-                onPress={() => setSecurity(!security)}
-            >
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+            <View style={{ width: '30%' }}>
+                <TextInput
+                    autoCompleteType={'off'}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry={security}
+                    value={password}
+                    onChangeText={(newText: string) => setPassword(newText)}
+                />
+            </View>
+            <TouchableWithoutFeedback onPress={() => setSecurity(!security)}>
                 <SvgIcon icon={security ? SVG_ICON.EYE_OPEN : SVG_ICON.EYE_CLOSE} />
             </TouchableWithoutFeedback>
-        </>
+        </View>
     );
 };
 

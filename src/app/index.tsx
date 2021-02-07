@@ -140,8 +140,8 @@ const Index = () => {
 
     const authContext = useMemo(
         () => ({
-            signIn: async (data: any) => {
-                const response = await loginClient.login('thomas.hebrard134@gmail.com', '1234');
+            signIn: async (email: string, password: string) => {
+                const response = await loginClient.login(email, password);
 
                 dispatch({ type: 'SIGN_IN', token: response.token });
             },

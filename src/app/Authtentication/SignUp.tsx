@@ -23,7 +23,7 @@ const SignUp = () => {
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 value={firstName}
-                onChange={(newText: any) => setFirstName(newText)}
+                onChangeText={(newText: string) => setFirstName(newText)}
             />
             <View style={{ height: '5%' }}></View>
             <TextInput
@@ -31,7 +31,7 @@ const SignUp = () => {
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 value={lastName}
-                onChange={(newText: any) => setLastName(newText)}
+                onChangeText={(newText: string) => setLastName(newText)}
             />
             <View style={{ height: '5%' }}></View>
             <TextInput
@@ -39,7 +39,7 @@ const SignUp = () => {
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 value={email}
-                onChange={(newText: any) => setEmail(newText)}
+                onChangeText={(newText: string) => setEmail(newText)}
             />
             <View style={{ height: '5%' }}></View>
             <PasswordInput password={password} setPassword={setPassword} />
