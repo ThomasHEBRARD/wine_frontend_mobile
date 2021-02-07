@@ -14,7 +14,6 @@ class Login extends ApiClient {
         password: string,
         cancelToken?: CancelToken
     ): Promise<any> => {
-        console.log('coucou')
         const response = await axios.post(
             this.url('login'),
             {
@@ -23,7 +22,6 @@ class Login extends ApiClient {
             },
             { headers: getHeaders(), cancelToken }
         );
-        console.log(response)
         return response.data;
     };
 }
