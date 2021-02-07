@@ -3,38 +3,46 @@ import { SafeAreaView, View, TextInput } from 'react-native';
 import Button from 'component/Button';
 import { SVG_ICON } from 'svg/enum';
 import loginClient from 'services/api/authentication';
+import PasswordInput from './PasswordInput';
 
 const SignUp = () => {
-    const [firstName, setFirstName] = useState('Michael');
-    const [lastName, setLastName] = useState('Scott');
-    const [email, setEmail] = useState('michaelscottpapercompany@gmail.com');
-    const [password, setPassword] = useState('1234');
+    const defaultText = {
+        firstName: 'Michael',
+        lastName: 'Scott',
+        email: 'example@xxx.yyy',
+    };
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <SafeAreaView>
             <TextInput
-                style={{ backgroundColor: 'grey' }}
+                placeholder={defaultText.firstName}
+                autoCompleteType={'off'}
+                autoCorrect={false}
                 value={firstName}
                 onChange={(newText: any) => setFirstName(newText)}
             />
             <View style={{ height: '5%' }}></View>
             <TextInput
-                style={{ backgroundColor: 'grey' }}
+                placeholder={defaultText.lastName}
+                autoCompleteType={'off'}
+                autoCorrect={false}
                 value={lastName}
                 onChange={(newText: any) => setLastName(newText)}
             />
             <View style={{ height: '5%' }}></View>
             <TextInput
-                style={{ backgroundColor: 'grey' }}
+                placeholder={defaultText.email}
+                autoCompleteType={'off'}
+                autoCorrect={false}
                 value={email}
                 onChange={(newText: any) => setEmail(newText)}
             />
             <View style={{ height: '5%' }}></View>
-            <TextInput
-                style={{ backgroundColor: 'grey' }}
-                value={password}
-                onChange={(newText: any) => setPassword(newText)}
-            />
+            <PasswordInput password={password} setPassword={setPassword} />
 
             <Button
                 icon={SVG_ICON.PROFILE}

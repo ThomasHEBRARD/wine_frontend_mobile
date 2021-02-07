@@ -109,7 +109,7 @@ const Index = () => {
     const [initialState] = useState();
     const { Navigator, Screen } = createStackNavigator();
 
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const [state, dispatch] = useReducer(
         (prevState: any, action: any) => {
