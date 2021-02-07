@@ -6,6 +6,7 @@ class Login extends ApiClient {
         super();
         this.paths = {
             login: '/login/',
+            signUp: '/register/',
         };
     }
 
@@ -22,6 +23,22 @@ class Login extends ApiClient {
             },
             { headers: getHeaders(), cancelToken }
         );
+        return response.data;
+    };
+
+    public signUp = async (
+        params: {
+            first_name: string;
+            last_name: string;
+            email: string;
+            password: string;
+        },
+        cancelToken?: CancelToken
+    ): Promise<any> => {
+        const response = await axios.post(this.url('signUp'), params, {
+            headers: getHeaders(),
+            cancelToken,
+        });
         return response.data;
     };
 }

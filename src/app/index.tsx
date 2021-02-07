@@ -14,7 +14,7 @@ import MyCellar from './pages/MyCellar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBar from './Navigation/TabBar';
 import MyBottles from './pages/MyBottles';
-import loginClient from 'services/api/login';
+import loginClient from 'services/api/authentication';
 import Login, { AuthContext } from './Authtentication';
 import SignUp from './Authtentication/SignUp';
 import MyCellarHeader from './pages/MyCellar/MyCellarHeader';
