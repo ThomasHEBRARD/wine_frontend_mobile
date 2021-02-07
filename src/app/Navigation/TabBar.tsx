@@ -46,6 +46,7 @@ const TabBar = (props: { state: any; descriptors: any; navigation: any }) => {
                 // TODO Test that labels are the right one
                 return (
                     <TouchableOpacity
+                        key={index}
                         accessibilityRole="button"
                         accessibilityState={isFocused ? { selected: true } : {}}
                         accessibilityLabel={options.tabBarAccessibilityLabel}

@@ -26,7 +26,8 @@ const SubTextSection = (props: { subtext: string }) => {
     return <Text style={subTextStyle.container}>{subtext}</Text>;
 };
 interface ButtonProps {
-    onClick?: () => void;
+    //todo : change onCLick typing
+    onClick?: any;
     needsDouble?: boolean;
     icon: string;
     text: string;

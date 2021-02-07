@@ -1,10 +1,24 @@
 import 'react-native-gesture-handler';
-import React, { Suspense, createElement as $ } from 'react';
+import React, {
+    createElement as $,
+    useState,
+    createContext,
+    useReducer,
+    useEffect,
+    useMemo,
+    useContext,
+} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView, StyleSheet, View, Text, StatusBar } from 'react-native';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import {
+    NavigationContainer,
+    DefaultTheme,
+    NavigationContainerRef,
+} from '@react-navigation/native';
 import { SVG_ICON } from 'svg/enum';
 import MenuLink from './Menu/MenuLink';
 import Settings from './Menu/MenuSettings';
+import Button from '../component/Button';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import Profile from './Menu/MenuProfile';
 import MyCellar from './pages/MyCellar';
@@ -108,7 +122,7 @@ const BottomTabRoute = () => {
     return $(
         Navigator,
         {
-            initialRouteName: 'SETTINGS',
+            initialRouteName: 'CELLAR',
             children: <View>dzdzdz</View>,
             tabBar: TabBar,
         },
@@ -122,17 +136,117 @@ const BottomTabRoute = () => {
         })
     );
 };
-export default function Index() {
-    return (
-        // TODO: Add Provider, store
-        <NavigationContainer
-            theme={{ ...DefaultTheme, colors: { ...DefaultTheme.colors, background: 'white' } }}
-        >
-            {/* <React.StrictMode> */}
-            <Suspense fallback={<>Loading</>}>
-                <BottomTabRoute />
-            </Suspense>
-            {/* </React.StrictMode> */}
-        </NavigationContainer>
+const Login = () => {
+    const { signIn } = useContext(AuthContext);
+    return <Button icon={SVG_ICON.SETTINGS} text={'login'} subtext={'login'} onClick={signIn} />;
+};
+
+const Signup = () => <></>;
+
+const LoginRoute = () => {
+    const { Navigator, Screen } = createStackNavigator();
+    return $(
+        Navigator,
+        {
+            initialRouteName: 'LOGIN',
+            children: <></>,
+            headerMode: 'screen',
+        },
+        $(Screen, {
+            name: 'LOGIN',
+            component: Login,
+        }),
+        $(Screen, {
+            name: 'SIGNUP',
+            component: Signup,
+        })
     );
-}
+};
+
+export const AuthContext = createContext({
+    signIn: (data: any) => new Promise<void>((resolve) => resolve()),
+    signOut: () => undefined,
+    signUp: (data: any) => new Promise<void>((resolve) => resolve()),
+});
+
+const Index = () => {
+    const ref = React.useRef<NavigationContainerRef>(null);
+    const [initialState] = useState();
+    const { Navigator, Screen } = createStackNavigator();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [userToken, setUserToken] = useState(null);
+
+    const [state, dispatch] = useReducer(
+        (prevState: any, action: any) => {
+            switch (action.type) {
+                case 'RESTORE_TOKEN':
+                    return { ...prevState, userToken: action.token, isLoading: false };
+                case 'SIGN_IN':
+                    return { ...prevState, isSignout: false, userToken: action.token };
+                case 'SIGN_OUT':
+                    return { ...prevState, isSignout: true, userToken: null };
+            }
+        },
+        { isLoading: true, isSignout: false, userToken: null }
+    );
+
+    useEffect(() => {
+        const bootstratAsync = async () => {
+            let userToken;
+            try {
+                userToken = await AsyncStorage.getItem('userToken');
+            } catch (e) {
+                // restoring token failed
+            }
+            dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+        };
+        bootstratAsync();
+    }, []);
+
+    const authContext = useMemo(
+        () => ({
+            signIn: async (data: any) => {
+                // In prod, we'll need to send dome data (username, password)
+                // after getting the token, we need to persist the token using AsyncStorage
+                dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+            },
+            signOut: () => dispatch({ type: 'SIGN_OUT' }),
+            signUp: async (data: any) => {
+                dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+            },
+        }),
+        []
+    );
+    useEffect(() => console.log(state.userToken), [state]);
+
+    return $(
+        AuthContext.Provider,
+        //@ts-ignore
+        { value: authContext },
+        $(
+            NavigationContainer,
+            {
+                initialState,
+                ref,
+                theme: { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: 'white' } },
+                children: <></>,
+            },
+            $(
+                Navigator,
+                {
+                    initialRouteName: 'Login',
+                    children: <></>,
+                    screenOptions: {
+                        headerShown: false,
+                    },
+                },
+                $(Screen, {
+                    name: 'Login',
+                    component: state.userToken === null ? LoginRoute : BottomTabRoute,
+                })
+            )
+        )
+    );
+};
+export default Index;
