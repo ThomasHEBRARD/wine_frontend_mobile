@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { SafeAreaView, View, TextInput } from 'react-native';
 import Button from 'component/Button';
 import { SVG_ICON } from 'svg/enum';
-import loginClient from 'services/api/authentication';
 import PasswordInput from './PasswordInput';
+import { AuthContext } from '.';
 
 const SignUp = () => {
     const defaultText = {
@@ -11,6 +11,9 @@ const SignUp = () => {
         lastName: 'Scott',
         email: 'example@xxx.yyy',
     };
+
+    const { signUp } = useContext(AuthContext);
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -44,19 +47,7 @@ const SignUp = () => {
             <View style={{ height: '5%' }}></View>
             <PasswordInput password={password} setPassword={setPassword} />
 
-            <Button
-                icon={SVG_ICON.PROFILE}
-                text={'Signup'}
-                subtext={''}
-                onClick={() => {
-                    loginClient.signUp({
-                        first_name: firstName,
-                        last_name: lastName,
-                        email,
-                        password,
-                    });
-                }}
-            />
+            <Button icon={SVG_ICON.PROFILE} text={'Signup'} subtext={''} onClick={signUp} />
         </SafeAreaView>
     );
 };

@@ -19,6 +19,7 @@ import Login, { AuthContext } from './Authtentication';
 import SignUp from './Authtentication/SignUp';
 import MyCellarHeader from './pages/MyCellar/MyCellarHeader';
 import BackArrow from './Navigation/BackArrow';
+import { SignInProps, SignUpProps } from 'services/type/authentication';
 
 const MainRoute = () => {
     const { Navigator, Screen } = createStackNavigator();
@@ -140,7 +141,7 @@ const Index = () => {
 
     const authContext = useMemo(
         () => ({
-            signIn: async (email: string, password: string) => {
+            signIn: async (data: SignInProps) => {
                 // toLowerCase()
                 const response = await loginClient.login('M@gmail.com', '1234');
                 await AsyncStorage.setItem('userToken', response.token);
@@ -152,7 +153,13 @@ const Index = () => {
                 navigation.navigate('Login');
                 dispatch({ type: 'SIGN_OUT' });
             },
-            signUp: async (data: any) => {
+            signUp: async (data: SignUpProps) => {
+                loginClient.signUp({
+                    first_name: data.firstName,
+                    last_name: data.lastName,
+                    email: data.email,
+                    password: data.password,
+                });
                 dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
             },
         }),

@@ -1,5 +1,5 @@
 export interface BottleProps {
-    ìd: string;
+    id: string;
     name: string;
     code: string;
     date: string;
