@@ -7,6 +7,7 @@ class Login extends ApiClient {
         this.paths = {
             login: '/login/',
             signUp: '/register/',
+            logout: '/logout/',
         };
     }
 
@@ -21,8 +22,15 @@ class Login extends ApiClient {
                 email,
                 password,
             },
-            { headers: await getHeaders(), cancelToken }
+            { cancelToken }
         );
+        return response.data;
+    };
+
+    public logout = async () => {
+        const response = await axios.post(this.url('logout'), null, {
+            headers: await getHeaders(),
+        });
         return response.data;
     };
 

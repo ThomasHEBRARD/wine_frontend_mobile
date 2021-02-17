@@ -6,7 +6,7 @@ import PasswordInput from './PasswordInput';
 
 export const AuthContext = createContext({
     signIn: (email: string, password: string) => new Promise<void>((resolve) => resolve()),
-    signOut: () => undefined,
+    signOut: (navigation: any) => undefined,
     signUp: (data: any) => new Promise<void>((resolve) => resolve()),
 });
 

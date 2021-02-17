@@ -141,11 +141,17 @@ const Index = () => {
     const authContext = useMemo(
         () => ({
             signIn: async (email: string, password: string) => {
-                const response = await loginClient.login('thomas.hebrard134@gmail.com', '1234');
+                // toLowerCase()
+                const response = await loginClient.login('M@gmail.com', '1234');
                 await AsyncStorage.setItem('userToken', response.token);
                 dispatch({ type: 'SIGN_IN', token: response.token });
             },
-            signOut: () => dispatch({ type: 'SIGN_OUT' }),
+            signOut: async (navigation: any) => {
+                await loginClient.logout();
+                await AsyncStorage.removeItem('userToken');
+                navigation.navigate('Login');
+                dispatch({ type: 'SIGN_OUT' });
+            },
             signUp: async (data: any) => {
                 dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
             },
