@@ -1,18 +1,17 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import logger from 'services/logger/logger';
 
-export const getHeaders = (addAuthentication = true) => {
+export const getHeaders = async () => {
     const header: { [k: string]: string } = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
     };
-    // TODO: add token heere
-    // if (addAuthentication) {
-    //     get mytoken -> local storage ?
-    //     if (mytoken) {
-    //         h.Authorization = `jwt ${JSON.parse(mytoken).token}`;
-    //     }
-    // }
+    const userToken = await AsyncStorage.getItem('userToken');
+
+    if (userToken) {
+        header.Authorization = `Bearer ${userToken}`;
+    }
     return header;
 };
 

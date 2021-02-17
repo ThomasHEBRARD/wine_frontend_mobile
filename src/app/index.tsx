@@ -142,7 +142,7 @@ const Index = () => {
         () => ({
             signIn: async (email: string, password: string) => {
                 const response = await loginClient.login('thomas.hebrard134@gmail.com', '1234');
-
+                await AsyncStorage.setItem('userToken', response.token);
                 dispatch({ type: 'SIGN_IN', token: response.token });
             },
             signOut: () => dispatch({ type: 'SIGN_OUT' }),
