@@ -3,10 +3,10 @@ import { SafeAreaView, TextInput, View } from 'react-native';
 import Button from 'component/Button';
 import { SVG_ICON } from 'svg/enum';
 import PasswordInput from './PasswordInput';
-import { SigninProps, SignUpProps } from 'services/type/authentication';
+import { SignInProps, SignUpProps } from 'services/type/authentication';
 
 export const AuthContext = createContext({
-    signIn: (Data: SigninProps) => new Promise<void>((resolve) => resolve()),
+    signIn: (data: SignInProps) => new Promise<void>((resolve) => resolve()),
     signOut: (navigation: any) => undefined,
     signUp: (data: SignUpProps) => new Promise<void>((resolve) => resolve()),
 });
@@ -36,7 +36,7 @@ const Login = (props: { navigation: any }) => {
                 icon={SVG_ICON.PROFILE}
                 text={'Sign In'}
                 subtext={'Sign In'}
-                onClick={() => signIn({ email, password })}
+                onClick={() => signIn({ email: 'm@gmail.com', password: '1234' })}
             />
             <Button
                 icon={SVG_ICON.PROFILE}

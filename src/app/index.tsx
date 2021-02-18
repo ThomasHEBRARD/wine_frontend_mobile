@@ -141,9 +141,9 @@ const Index = () => {
 
     const authContext = useMemo(
         () => ({
+            //check right token?
             signIn: async (data: SignInProps) => {
-                // toLowerCase()
-                const response = await loginClient.login('M@gmail.com', '1234');
+                const response = await loginClient.login(data.email.toLowerCase(), data.password);
                 await AsyncStorage.setItem('userToken', response.token);
                 dispatch({ type: 'SIGN_IN', token: response.token });
             },
