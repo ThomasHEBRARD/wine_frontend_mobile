@@ -5,22 +5,24 @@ import { SVG_ICON } from 'svg/enum';
 import PasswordInput from './PasswordInput';
 import loginClient from 'services/api/authentication';
 import { SignUpProps } from 'services/type/authentication';
+import { connect, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUp = () => {
-    const defaultText = {
-        firstName: 'Michael',
-        lastName: 'Scott',
-        email: 'example@xxx.yyy',
-    };
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
 
     const signUp = async (data: SignUpProps) => {
-        loginClient.signUp({
+        const userToken = await loginClient.signUp({
             first_name: data.firstName,
             last_name: data.lastName,
             email: data.email,
             password: data.password,
         });
-        // setState(authReducer(_, { type: 'SIGN_IN', value: 'dummy-auth-token' }));
+        console.log(userToken);
+        const action = { type: 'SIGN_UP', value: userToken };
+        dispatch(action);
+        navigation.navigate('MainRoute');
     };
 
     const [data, setData] = useState({
@@ -29,6 +31,12 @@ const SignUp = () => {
         email: '',
         password: '',
     });
+
+    const defaultText = {
+        firstName: 'Michael',
+        lastName: 'Scott',
+        email: 'example@xxx.yyy',
+    };
 
     return (
         <SafeAreaView>
@@ -71,4 +79,11 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+const mapStateToProps = (state: { userToken: string }) => {
+    return { userToken: state.userToken };
+};
+const mapDispatchToProps = (dispatch: (arg0: any) => any) => {
+    return { dispatch: (action: any) => dispatch(action) };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
