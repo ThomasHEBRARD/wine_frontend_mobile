@@ -2,7 +2,6 @@ import React from 'react';
 import MenuLink from 'main/Menu/MenuLink';
 import { SafeAreaView, StatusBar, View, Text, StyleSheet } from 'react-native';
 import { SVG_ICON } from 'svg/enum';
-import Logout from 'main/Authtentication/Logout';
 
 const MyCellarHeader = (props: { navigation: any }) => {
     const { navigation } = props;
@@ -39,7 +38,6 @@ const MyCellarHeader = (props: { navigation: any }) => {
                         icon={SVG_ICON.PROFILE}
                         onClick={() => navigation.navigate('Profile')}
                     />
-                    <Logout />
                     <MenuLink
                         icon={SVG_ICON.SETTINGS}
                         onClick={() => navigation.navigate('Settings')}

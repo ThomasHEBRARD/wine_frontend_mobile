@@ -1,4 +1,5 @@
 import React from 'react';
+import Logout from 'main/Authtentication/Logout';
 import { View, Text, StyleSheet } from 'react-native';
 import { SVG_ICON } from 'svg/enum';
 import SvgIcon from 'svg/svgIcon';
@@ -29,6 +30,7 @@ const Settings = () => {
                 <Text>Autres</Text>
                 <SvgIcon icon={SVG_ICON.DOWN_ARROW} />
             </View>
+            <Logout />
         </View>
     );
 };
