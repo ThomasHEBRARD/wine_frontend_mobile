@@ -12,7 +12,6 @@ export const getHeaders = async () => {
     if (userToken) {
         header.Authorization = `Bearer ${userToken}`;
     }
-    console.log('logout', userToken);
     return header;
 };
 

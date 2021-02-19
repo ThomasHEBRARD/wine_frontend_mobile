@@ -10,7 +10,7 @@ const authReducer = (
         case 'RESTORE_TOKEN':
             return { ...state, userToken: action.value, isLoading: false };
         case 'SIGN_IN':
-            return { ...state, isSignout: false, userToken: action.value };
+            return { ...state, userToken: action.value, isSignout: false };
         case 'SIGN_OUT':
             return { ...state, isSignout: true, userToken: null };
 
