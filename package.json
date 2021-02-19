@@ -24,11 +24,15 @@
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.2",
     "react-native-svg": "12.1.0",
+    "react-redux": "^7.2.2",
     "react-router-native": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@types/react-native": "~0.63.2",
+    "@types/react-redux": "^7.1.16",
     "babel-preset-react-native": "^4.0.1",
     "metro-react-native-babel-preset": "^0.65.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",

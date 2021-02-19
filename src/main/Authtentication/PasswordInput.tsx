@@ -4,7 +4,7 @@ import { TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handle
 import { SVG_ICON } from 'svg/enum';
 import SvgIcon from 'svg/svgIcon';
 
-const PasswordInput = (props: { password: string; setPassword: (text: string) => void }) => {
+const PasswordInput = (props: { password: string; setPassword: (newPassword: string) => void }) => {
     const { password, setPassword } = props;
 
     const [security, setSecurity] = useState(true);

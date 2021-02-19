@@ -1,25 +1,35 @@
 import 'react-native-gesture-handler';
-import React, { createElement as $, useState, useReducer, useEffect, useMemo } from 'react';
+import React, { createElement as $, useEffect, useMemo, useState } from 'react';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaView } from 'react-native';
+import { Provider } from 'react-redux';
+import Store from 'services/reducers/store';
 import {
     NavigationContainer,
     DefaultTheme,
     NavigationContainerRef,
 } from '@react-navigation/native';
-import Settings from './Menu/MenuSettings';
-import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
-import Profile from './Menu/MenuProfile';
-import MyCellar from './pages/MyCellar';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import TabBar from './Navigation/TabBar';
-import MyBottles from './pages/MyBottles';
-import loginClient from 'services/api/authentication';
-import Login, { AuthContext } from './Authtentication';
-import SignUp from './Authtentication/SignUp';
-import MyCellarHeader from './pages/MyCellar/MyCellarHeader';
-import BackArrow from './Navigation/BackArrow';
+
 import { SignInProps, SignUpProps } from 'services/type/authentication';
+import loginClient from 'services/api/authentication';
+import authReducer from 'services/reducers/authentication';
+
+import Settings from './main/Menu/MenuSettings';
+import Profile from './main/Menu/MenuProfile';
+
+import MyCellar from './main/pages/MyCellar';
+import MyBottles from './main/pages/MyBottles';
+import MyCellarHeader from './main/pages/MyCellar/MyCellarHeader';
+
+import TabBar from './main/Navigation/TabBar';
+import BackArrow from './main/Navigation/BackArrow';
+
+import Login from './main/Authtentication';
+import SignUp from './main/Authtentication/SignUp';
+
+import OnBoarding from './main/OnBoarding';
 
 const MainRoute = () => {
     const { Navigator, Screen } = createStackNavigator();
@@ -105,71 +115,14 @@ const LoginRoute = () => {
     );
 };
 
-const Index = () => {
-    const ref = React.useRef<NavigationContainerRef>(null);
-    const [initialState] = useState();
+const App = () => {
+    const ref = React.useRef();
     const { Navigator, Screen } = createStackNavigator();
-
-    // const [isLoading, setIsLoading] = useState(false);
-
-    const [state, dispatch] = useReducer(
-        (prevState: any, action: any) => {
-            switch (action.type) {
-                case 'RESTORE_TOKEN':
-                    return { ...prevState, userToken: action.token, isLoading: false };
-                case 'SIGN_IN':
-                    return { ...prevState, isSignout: false, userToken: action.token };
-                case 'SIGN_OUT':
-                    return { ...prevState, isSignout: true, userToken: null };
-            }
-        },
-        { isLoading: true, isSignout: false, userToken: null }
-    );
-
-    useEffect(() => {
-        const bootstratAsync = async () => {
-            let userToken;
-            try {
-                userToken = await AsyncStorage.getItem('userToken');
-            } catch (e) {
-                // restoring token failed
-            }
-            dispatch({ type: 'RESTORE_TOKEN', token: userToken });
-        };
-        bootstratAsync();
-    }, []);
-
-    const authContext = useMemo(
-        () => ({
-            //check right token?
-            signIn: async (data: SignInProps) => {
-                const response = await loginClient.login(data.email.toLowerCase(), data.password);
-                await AsyncStorage.setItem('userToken', response.token);
-                dispatch({ type: 'SIGN_IN', token: response.token });
-            },
-            signOut: async (navigation: any) => {
-                await loginClient.logout();
-                await AsyncStorage.removeItem('userToken');
-                navigation.navigate('Login');
-                dispatch({ type: 'SIGN_OUT' });
-            },
-            signUp: async (data: SignUpProps) => {
-                loginClient.signUp({
-                    first_name: data.firstName,
-                    last_name: data.lastName,
-                    email: data.email,
-                    password: data.password,
-                });
-                dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
-            },
-        }),
-        []
-    );
+    const [initialState] = React.useState();
 
     return $(
-        AuthContext.Provider,
-        //@ts-ignore
-        { value: authContext },
+        Provider,
+        { store: Store },
         $(
             NavigationContainer,
             {
@@ -181,18 +134,27 @@ const Index = () => {
             $(
                 Navigator,
                 {
-                    initialRouteName: 'Login',
+                    initialRouteName: 'OnBoarding',
                     children: <></>,
                     screenOptions: {
                         headerShown: false,
                     },
                 },
                 $(Screen, {
+                    name: 'OnBoarding',
+                    component: OnBoarding,
+                }),
+                $(Screen, {
                     name: 'Login',
-                    component: state.userToken === null ? LoginRoute : BottomTabRoute,
+                    component: LoginRoute,
+                }),
+                $(Screen, {
+                    name: 'MainRoute',
+                    component: BottomTabRoute,
                 })
             )
         )
     );
 };
-export default Index;
+
+export default App;

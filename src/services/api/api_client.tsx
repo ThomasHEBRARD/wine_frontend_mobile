@@ -1,17 +1,18 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import logger from 'services/logger/logger';
+import Store from 'services/reducers/store';
 
 export const getHeaders = async () => {
     const header: { [k: string]: string } = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
     };
-    const userToken = await AsyncStorage.getItem('userToken');
+    const userToken = Store.getState().userToken;
 
     if (userToken) {
         header.Authorization = `Bearer ${userToken}`;
     }
+    console.log('logout', userToken);
     return header;
 };
 

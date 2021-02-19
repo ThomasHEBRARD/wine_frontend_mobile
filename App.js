@@ -1,10 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { AppRegistry } from 'react-native';
-import { StatusBar } from 'react-native';
-import Index from './src/app';
+import App from './src/app';
 
-export default function App() {
-    return <Index />;
+// AppRegistry.registerComponent('WineApp', () => App);
+export default function coucou() {
+    return <App />;
 }
-
-// AppRegistry.registerComponent('overlayApp', () => Index);

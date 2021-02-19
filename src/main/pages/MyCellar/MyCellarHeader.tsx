@@ -1,8 +1,8 @@
 import React from 'react';
-import MenuLink from 'app/Menu/MenuLink';
+import MenuLink from 'main/Menu/MenuLink';
 import { SafeAreaView, StatusBar, View, Text, StyleSheet } from 'react-native';
 import { SVG_ICON } from 'svg/enum';
-import Logout from 'app/Authtentication/Logout';
+import Logout from 'main/Authtentication/Logout';
 
 const MyCellarHeader = (props: { navigation: any }) => {
     const { navigation } = props;

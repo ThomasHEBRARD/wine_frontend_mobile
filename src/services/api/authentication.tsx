@@ -15,7 +15,7 @@ class Login extends ApiClient {
         email: string,
         password: string,
         cancelToken?: CancelToken
-    ): Promise<any> => {
+    ): Promise<{ token: string }> => {
         const response = await axios.post(
             this.url('login'),
             {
