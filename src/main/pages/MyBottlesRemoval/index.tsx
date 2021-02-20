@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import Bottles from 'services/api/bottles';
 import { BottleProps } from 'services/type/bottle';
-import BottleItem from './BottleItem';
+import BottleItemRemoval from './BottleItemRemoval';
 
-const MyBottles = () => {
+const MyBottlesRemoval = () => {
+    const [bottlesToRemove, setBottlesToRemove] = useState<BottleProps[]>([]);
     const [bottles, setBottles] = useState<BottleProps[]>([]);
 
     useEffect(() => {
@@ -20,10 +21,15 @@ const MyBottles = () => {
             <Text>Search Field (elastic search)</Text>
 
             {bottles?.map((bottle: any, idx: number) => (
-                <BottleItem key={idx} bottle={bottle} />
+                <BottleItemRemoval
+                    key={idx}
+                    bottle={bottle}
+                    bottlesToRemove={bottlesToRemove}
+                    setBottlesToRemove={setBottlesToRemove}
+                />
             ))}
         </SafeAreaView>
     );
 };
 
-export default MyBottles;
+export default MyBottlesRemoval;
