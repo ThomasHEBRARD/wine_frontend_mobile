@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import Bottles from 'services/api/bottles';
-const MyBottles = () => {
+
+const MyBottles = (props: { isRemovalMode: boolean }) => {
+    const { isRemovalMode } = props;
+    
     const [bottles, setBottles] = useState<any[]>([]);
 
     useEffect(() => {

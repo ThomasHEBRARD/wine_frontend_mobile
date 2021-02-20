@@ -1,7 +1,8 @@
 export interface BottleProps {
-    id: string;
+    id?: string;
+    stock: number;
     name: string;
-    code: string;
-    date: string;
-    millesime: string;
+    code?: string;
+    date?: string;
+    millesime?: string;
 }
