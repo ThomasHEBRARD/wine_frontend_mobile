@@ -1,5 +1,6 @@
 import ApiClient, { getHeaders } from './api_client';
 import axios, { CancelToken } from 'axios';
+import { DataBottleProps } from 'services/type/fetch';
 
 class Bottles extends ApiClient {
     public constructor() {
@@ -10,13 +11,13 @@ class Bottles extends ApiClient {
     }
 
     // TODO Put BottleProps
-    public getBottles = async (cancelToken?: CancelToken): Promise<any[]> => {
+    public getBottles = async (cancelToken?: CancelToken): Promise<DataBottleProps> => {
         const response = await axios.get(this.url('bottles'), {
             headers: getHeaders(),
             cancelToken,
         });
 
-        return response.data.results;
+        return response.data;
     };
 }
 
