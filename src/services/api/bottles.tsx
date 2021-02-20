@@ -8,11 +8,11 @@ class Bottles extends ApiClient {
             bottles: '/bottles/',
         };
     }
-    
+
     // TODO Put BottleProps
     public getBottles = async (cancelToken?: CancelToken): Promise<any[]> => {
         const response = await axios.get(this.url('bottles'), {
-            headers: await getHeaders(),
+            headers: getHeaders(),
             cancelToken,
         });
 

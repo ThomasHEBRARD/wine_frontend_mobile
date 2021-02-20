@@ -29,7 +29,7 @@ class Login extends ApiClient {
 
     public logout = async () => {
         const response = await axios.post(this.url('logout'), null, {
-            headers: await getHeaders(),
+            headers: getHeaders(),
         });
         return response.data;
     };
@@ -44,7 +44,7 @@ class Login extends ApiClient {
         cancelToken?: CancelToken
     ): Promise<any> => {
         const response = await axios.post(this.url('signUp'), params, {
-            headers: await getHeaders(),
+            headers: getHeaders(),
             cancelToken,
         });
         return response.data;

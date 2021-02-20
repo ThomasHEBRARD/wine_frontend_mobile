@@ -2,7 +2,7 @@ import axios from 'axios';
 import logger from 'services/logger/logger';
 import Store from 'services/reducers/store';
 
-export const getHeaders = async () => {
+export const getHeaders = () => {
     const header: { [k: string]: string } = {
         Accept: 'application/json',
         'Content-Type': 'application/json',

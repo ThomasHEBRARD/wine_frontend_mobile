@@ -13,7 +13,7 @@ class MyCellar extends ApiClient {
         cancelToken?: CancelToken
     ): Promise<{ name: string; code: string }[]> => {
         const response = await axios.get(this.url('myCellarName'), {
-            headers: await getHeaders(),
+            headers: getHeaders(),
             cancelToken,
         });
         return response.data;
