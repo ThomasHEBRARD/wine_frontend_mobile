@@ -28,8 +28,8 @@ import BottlePage from './main/pages/BottlePage';
 import TabBar from './main/Navigation/TabBar';
 import BackArrow from './main/Navigation/BackArrow';
 
-import Login from './main/Authtentication';
-import SignUp from './main/Authtentication/SignUp';
+import Login from './main/Authentication';
+import SignUp from './main/Authentication/SignUp';
 
 import OnBoarding from './main/OnBoarding';
 

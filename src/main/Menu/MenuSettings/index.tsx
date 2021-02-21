@@ -1,5 +1,5 @@
 import React from 'react';
-import Logout from 'main/Authtentication/Logout';
+import Logout from 'main/Authentication/Logout';
 import { View, Text, StyleSheet } from 'react-native';
 import { SVG_ICON } from 'svg/enum';
 import SvgIcon from 'svg/svgIcon';
