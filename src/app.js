@@ -155,14 +155,17 @@ const App = () => {
                 $(Screen, {
                     name: 'OnBoarding',
                     component: OnBoarding,
+                    options: { animationEnabled: false },
                 }),
                 $(Screen, {
                     name: 'Login',
                     component: LoginRoute,
+                    options: { animationEnabled: false },
                 }),
                 $(Screen, {
                     name: 'MainRoute',
                     component: BottomTabRoute,
+                    options: { animationEnabled: false },
                 })
             )
         )
