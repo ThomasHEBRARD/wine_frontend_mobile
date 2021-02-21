@@ -11,8 +11,12 @@ class Bottles extends ApiClient {
     }
 
     // TODO Put BottleProps
-    public getBottles = async (cancelToken?: CancelToken): Promise<DataBottleProps> => {
+    public getBottles = async (
+        params: { search: string },
+        cancelToken?: CancelToken
+    ): Promise<DataBottleProps> => {
         const response = await axios.get(this.url('bottles'), {
+            params,
             headers: getHeaders(),
             cancelToken,
         });
