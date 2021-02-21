@@ -19,7 +19,6 @@ const SignUp = () => {
             email: data.email,
             password: data.password,
         });
-        console.log(userToken);
         const action = { type: 'SIGN_UP', value: userToken };
         dispatch(action);
         navigation.navigate('MainRoute');
@@ -42,6 +41,7 @@ const SignUp = () => {
         <SafeAreaView>
             <TextInput
                 placeholder={defaultText.firstName}
+                autoCapitalize={'none'}
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 value={data.firstName}
@@ -50,6 +50,7 @@ const SignUp = () => {
             <View style={{ height: '5%' }}></View>
             <TextInput
                 placeholder={defaultText.lastName}
+                autoCapitalize={'none'}
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 value={data.lastName}
@@ -58,6 +59,7 @@ const SignUp = () => {
             <View style={{ height: '5%' }}></View>
             <TextInput
                 placeholder={defaultText.email}
+                autoCapitalize={'none'}
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 value={data.email}

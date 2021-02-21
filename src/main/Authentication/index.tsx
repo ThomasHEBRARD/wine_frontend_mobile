@@ -45,6 +45,12 @@ const Login = (props: { navigation: any }) => {
             />
             <Button
                 icon={SVG_ICON.PROFILE}
+                text={'Sign In'}
+                subtext={'Sign In'}
+                onClick={() => signIn({ email: 'm2@gmil.com', password: '1234' })}
+            />
+            <Button
+                icon={SVG_ICON.PROFILE}
                 text={'Sign Up'}
                 subtext={'Not a member yet ?'}
                 onClick={() => navigation.navigate('SIGNUP')}

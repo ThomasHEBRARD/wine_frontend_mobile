@@ -14,7 +14,7 @@ const PasswordInput = (props: { password: string; setPassword: (newPassword: str
             <View style={{ width: '30%' }}>
                 <TextInput
                     autoCompleteType={'off'}
-                    autoCapitalize="none"
+                    autoCapitalize={'none'}
                     autoCorrect={false}
                     secureTextEntry={security}
                     value={password}
