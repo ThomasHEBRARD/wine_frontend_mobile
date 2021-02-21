@@ -23,6 +23,7 @@ import MyCellar from './main/pages/MyCellar';
 import MyBottles from './main/pages/MyBottles';
 import MyBottlesRemoval from './main/pages/MyBottlesRemoval';
 import MyCellarHeader from './main/pages/MyCellar/MyCellarHeader';
+import BottlePage from './main/pages/BottlePage';
 
 import TabBar from './main/Navigation/TabBar';
 import BackArrow from './main/Navigation/BackArrow';
@@ -58,6 +59,11 @@ const MainRoute = () => {
         $(Screen, {
             name: 'MyBottles',
             component: MyBottles,
+            options: { header: BackArrow },
+        }),
+        $(Screen, {
+            name: 'BottlePage',
+            component: BottlePage,
             options: { header: BackArrow },
         }),
         $(Screen, {

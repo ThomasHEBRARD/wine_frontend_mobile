@@ -6,3 +6,6 @@ export interface BottleProps {
     date?: string;
     millesime?: string;
 }
+
+// BottleItemProps
+// BottlePageProps

@@ -13,6 +13,7 @@ const Profile = () => {
             justifyContent: 'space-between',
         },
     });
+
     return (
         <SafeAreaView style={style.container}>
             <View style={style.settingField}>
