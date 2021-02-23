@@ -1,9 +1,17 @@
+export interface authReducerProps {
+    userToken: string | null | undefined;
+    isLoading: boolean;
+    isSignout: boolean;
+}
+
+const authReducerIntitialState: authReducerProps = {
+    userToken: '',
+    isLoading: true,
+    isSignout: false,
+};
+
 const authReducer = (
-    state: { userToken: string | null | undefined; isLoading: boolean; isSignout: boolean } = {
-        userToken: '',
-        isLoading: true,
-        isSignout: false,
-    },
+    state: authReducerProps = authReducerIntitialState,
     action: { type: string; value: string | null | undefined }
 ) => {
     switch (action.type) {

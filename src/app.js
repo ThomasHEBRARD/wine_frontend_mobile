@@ -22,6 +22,7 @@ import Profile from './main/Menu/MenuProfile';
 import MyCellar from './main/pages/MyCellar';
 import MyBottles from './main/pages/MyBottles';
 import MyBottlesRemoval from './main/pages/MyBottlesRemoval';
+import MyBottlesRemovalHeader from './main/pages/MyBottlesRemoval/MyBottlesRemovalHeader';
 import MyCellarHeader from './main/pages/MyCellar/MyCellarHeader';
 import BottlePage from './main/pages/BottlePage';
 
@@ -54,7 +55,7 @@ const MainRoute = () => {
         $(Screen, {
             name: 'MyBottlesRemoval',
             component: MyBottlesRemoval,
-            options: { header: BackArrow },
+            options: { header: () => <MyBottlesRemovalHeader /> },
         }),
         $(Screen, {
             name: 'MyBottles',

@@ -5,7 +5,6 @@ import { BottleProps } from 'services/type/bottle';
 import BottleItemRemoval from './BottleItemRemoval';
 
 const MyBottlesRemoval = () => {
-    const [bottlesToRemove, setBottlesToRemove] = useState<BottleProps[]>([]);
     const [bottles, setBottles] = useState<BottleProps[]>([]);
     const [search, setSearch] = useState<string>('');
 
@@ -29,12 +28,7 @@ const MyBottlesRemoval = () => {
             />
 
             {bottles?.map((bottle: any, idx: number) => (
-                <BottleItemRemoval
-                    key={idx}
-                    bottle={bottle}
-                    bottlesToRemove={bottlesToRemove}
-                    setBottlesToRemove={setBottlesToRemove}
-                />
+                <BottleItemRemoval key={idx} bottle={bottle} />
             ))}
         </SafeAreaView>
     );

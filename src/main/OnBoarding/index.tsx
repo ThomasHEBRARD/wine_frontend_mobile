@@ -10,7 +10,7 @@ const OnBoarding = () => {
 
     useEffect(() => {
         try {
-            const userToken = Store.getState().userToken;
+            const userToken = Store.getState().authReducer.userToken;
             if (userToken) {
                 const action = { action: 'RESTORE_TOKEN', value: userToken };
                 dispatch(action);

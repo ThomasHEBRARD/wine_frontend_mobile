@@ -7,7 +7,7 @@ export const getHeaders = () => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
     };
-    const userToken = Store.getState().userToken;
+    const userToken = Store.getState().authReducer.userToken;
 
     if (userToken) {
         header.Authorization = `Bearer ${userToken}`;
