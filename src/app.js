@@ -55,7 +55,7 @@ const MainRoute = () => {
         $(Screen, {
             name: 'MyBottlesRemoval',
             component: MyBottlesRemoval,
-            options: { header: () => <MyBottlesRemovalHeader /> },
+            options: { header: BackArrow },
         }),
         $(Screen, {
             name: 'MyBottles',
