@@ -1,11 +1,8 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import Button from 'component/Button';
 import BackArrow from 'main/Navigation/BackArrow';
-import { SVG_ICON } from 'svg/enum';
-import Store from 'services/reducers/store';
 import { connect } from 'react-redux';
-import bottle from 'services/api/bottles';
+import { ReducerStateProps } from 'services/reducers/combinedReducers';
 
 const MyBottlesRemovalHeader = (props: { navigation: any }) => {
     const { navigation } = props;
@@ -13,21 +10,12 @@ const MyBottlesRemovalHeader = (props: { navigation: any }) => {
     return (
         <SafeAreaView style={{ display: 'flex', flexDirection: 'row' }}>
             <BackArrow navigation={navigation} />
-            <Button
-                icon={SVG_ICON.EYE_OPEN}
-                text={''}
-                subtext={''}
-                onClick={async () => {
-                    const bottlesToRemove = Store.getState().removedBottlesReducer.bottlesToRemove;
-                    await bottle.removeBottles(bottlesToRemove);
-                }}
-            />
         </SafeAreaView>
     );
 };
 
-const mapStateToProps = (state: { bottlesToRemove: any }) => {
-    return { bottlesToRemove: state.bottlesToRemove };
+const mapStateToProps = (state: ReducerStateProps) => {
+    return { bottlesToRemove: state.removedBottlesReducer.bottlesToRemove };
 };
 const mapDispatchToProps = (dispatch: (arg0: any) => any) => {
     return { dispatch: (action: any) => dispatch(action) };

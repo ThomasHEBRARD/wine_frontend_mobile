@@ -6,6 +6,7 @@ import PasswordInput from './PasswordInput';
 import { SignInProps } from 'services/type/authentication';
 import loginClient from 'services/api/authentication';
 import { connect, useDispatch } from 'react-redux';
+import { ReducerStateProps } from 'services/reducers/combinedReducers';
 
 const Login = (props: { navigation: any }) => {
     const { navigation } = props;
@@ -59,8 +60,8 @@ const Login = (props: { navigation: any }) => {
     );
 };
 
-const mapStateToProps = (state: { userToken: string }) => {
-    return { userToken: state.userToken };
+const mapStateToProps = (state: ReducerStateProps) => {
+    return { userToken: state.authReducer.userToken };
 };
 const mapDispatchToProps = (dispatch: (arg0: any) => any) => {
     return { dispatch: (action: any) => dispatch(action) };

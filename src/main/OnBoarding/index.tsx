@@ -3,6 +3,7 @@ import { Text, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { connect, useDispatch } from 'react-redux';
 import Store from 'services/reducers/store';
+import { ReducerStateProps } from 'services/reducers/combinedReducers';
 
 const OnBoarding = () => {
     const navigation = useNavigation();
@@ -30,8 +31,8 @@ const OnBoarding = () => {
     );
 };
 
-const mapStateToProps = (state: { userToken: string }) => {
-    return { userToken: state.userToken };
+const mapStateToProps = (state: ReducerStateProps) => {
+    return { userToken: state.authReducer.userToken };
 };
 const mapDispatchToProps = (dispatch: (arg0: any) => any) => {
     return { dispatch: (action: any) => dispatch(action) };

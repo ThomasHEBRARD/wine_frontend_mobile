@@ -7,6 +7,7 @@ import loginClient from 'services/api/authentication';
 import { SignUpProps } from 'services/type/authentication';
 import { connect, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { ReducerStateProps } from 'services/reducers/combinedReducers';
 
 const SignUp = () => {
     const dispatch = useDispatch();
@@ -81,8 +82,8 @@ const SignUp = () => {
     );
 };
 
-const mapStateToProps = (state: { userToken: string }) => {
-    return { userToken: state.userToken };
+const mapStateToProps = (state: ReducerStateProps) => {
+    return { userToken: state.authReducer.userToken };
 };
 const mapDispatchToProps = (dispatch: (arg0: any) => any) => {
     return { dispatch: (action: any) => dispatch(action) };

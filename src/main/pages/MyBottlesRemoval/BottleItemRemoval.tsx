@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text, TouchableHighlight } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
-import { removedBottlesProps } from 'services/reducers/removedBottles';
+import { ReducerStateProps } from 'services/reducers/combinedReducers';
+import { RemovedBottlesProps } from 'services/reducers/removedBottles';
 import Store from 'services/reducers/store';
 import { BottleProps } from 'services/type/bottle';
 
 const BottleItemRemoval = (props: { bottle: BottleProps }) => {
     const { bottle } = props;
     const dispatch = useDispatch();
-    
-    const bottlesToRemove = Store.getState()?.removedBottlesReducer.bottlesToRemove;
-    
-    const [stockToRemove, setStockToRemove] = useState<number>(
-        bottlesToRemove?.find((bottles: removedBottlesProps) => bottles.bottleId === bottle.id)
-            ?.stockToRemove ?? 0
-    );
+
+    const bottlesToRemoveStock = Store.getState()?.removedBottlesReducer.bottlesToRemove?.find(
+        (bottles: RemovedBottlesProps) => bottles.bottleId === bottle.id
+    )?.stockToRemove;
+
+    const [stockToRemove, setStockToRemove] = useState<number>(bottlesToRemoveStock ?? 0);
+
+    useEffect(() => {
+        setStockToRemove(bottlesToRemoveStock ?? 0);
+    }, [bottlesToRemoveStock]);
 
     return (
         <SafeAreaView>
@@ -56,8 +60,8 @@ const BottleItemRemoval = (props: { bottle: BottleProps }) => {
     );
 };
 
-const mapStateToProps = (state: { bottlesToRemove: any }) => {
-    return { bottlesToRemove: state.bottlesToRemove };
+const mapStateToProps = (state: ReducerStateProps) => {
+    return { bottlesToRemove: state.removedBottlesReducer.bottlesToRemove };
 };
 const mapDispatchToProps = (dispatch: (arg0: any) => any) => {
     return { dispatch: (action: any) => dispatch(action) };

@@ -5,6 +5,7 @@ import loginClient from 'services/api/authentication';
 import { SVG_ICON } from 'svg/enum';
 import SvgIcon from 'svg/svgIcon';
 import { connect, useDispatch } from 'react-redux';
+import { ReducerStateProps } from 'services/reducers/combinedReducers';
 
 const Logout = () => {
     const navigation = useNavigation();
@@ -26,8 +27,8 @@ const Logout = () => {
     );
 };
 
-const mapStateToProps = (state: { userToken: string }) => {
-    return { userToken: state.userToken };
+const mapStateToProps = (state: ReducerStateProps) => {
+    return { userToken: state.authReducer.userToken };
 };
 const mapDispatchToProps = (dispatch: (arg0: any) => any) => {
     return { dispatch: (action: any) => dispatch(action) };
