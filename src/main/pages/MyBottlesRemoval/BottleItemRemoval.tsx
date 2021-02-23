@@ -21,7 +21,7 @@ const BottleItemRemoval = (props: { bottle: BottleProps }) => {
     }, [bottlesToRemoveStock]);
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ display: 'flex', flexDirection: 'row' }}>
             <Text>{bottle.name}</Text>
             <TouchableHighlight
                 disabled={!(stockToRemove > 0)}
