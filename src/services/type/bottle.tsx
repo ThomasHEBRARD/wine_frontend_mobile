@@ -1,11 +1,15 @@
 export interface BottleProps {
-    id?: string;
+    id: string;
     stock: number;
     name: string;
-    code?: string;
-    date?: string;
-    millesime?: string;
+    code: string;
+    millesime: number;
 }
 
-// BottleItemProps
-// BottlePageProps
+export const BlankBottle = {
+    id: '',
+    stock: 0,
+    name: '',
+    code: '',
+    millesime: 2000,
+};
