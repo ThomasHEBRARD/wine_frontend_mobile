@@ -24,6 +24,7 @@ import MyBottles from './main/pages/MyBottles';
 import MyBottlesRemoval from './main/pages/MyBottlesRemoval';
 import MyBottlesRemovalHeader from './main/pages/MyBottlesRemoval/MyBottlesRemovalHeader';
 import MyCellarHeader from './main/pages/MyCellar/MyCellarHeader';
+import MyBottlesAdding from './main/pages/MyBottlesAdding';
 import BottlePage from './main/pages/BottlePage';
 
 import TabBar from './main/Navigation/TabBar';
@@ -60,6 +61,11 @@ const MainRoute = () => {
         $(Screen, {
             name: 'MyBottles',
             component: MyBottles,
+            options: { header: BackArrow },
+        }),
+        $(Screen, {
+            name: 'MyBottlesAdding',
+            component: MyBottlesAdding,
             options: { header: BackArrow },
         }),
         $(Screen, {

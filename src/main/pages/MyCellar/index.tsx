@@ -26,6 +26,7 @@ const MyCellar = () => {
                     icon={SVG_ICON.PLUS}
                     text={'Ajouter'}
                     subtext={'Ajouter à ma cave'}
+                    onClick={() => navigation.navigate('MyBottlesAdding')}
                 />
                 <Button
                     needsDouble
