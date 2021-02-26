@@ -2,6 +2,7 @@ import ApiClient, { getHeaders } from './api_client';
 import axios, { CancelToken } from 'axios';
 import { DataBottleProps } from 'services/type/fetch';
 import { RemovedBottlesProps } from 'services/reducers/removedBottles';
+import { BottleFilters } from 'services/type/bottle';
 
 class Bottles extends ApiClient {
     public constructor() {
@@ -40,7 +41,7 @@ class Bottles extends ApiClient {
     };
 
     public searchBottleForAdding = async (
-        params: { search: string },
+        params: BottleFilters | { search: string | number } | undefined,
         cancelToken?: CancelToken
     ): Promise<DataBottleProps> => {
         const response = await axios.get(this.url('searchBottleForAdding'), {

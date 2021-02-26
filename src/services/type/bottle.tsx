@@ -1,15 +1,18 @@
-export interface BottleProps {
-    id: string;
-    stock: number;
+export interface BottleCollectionProps {
+    id: number;
     name: string;
     code: string;
-    millesime: number;
+    millesime?: number;
 }
 
-export const BlankBottle = {
-    id: '',
-    stock: 0,
-    name: '',
-    code: '',
-    millesime: 2000,
-};
+export interface BottleProps extends BottleCollectionProps {
+    stock: number;
+}
+
+export interface BottleFilters {
+    limit: number;
+    offset: number;
+    name?: string;
+    millesime?: number;
+    appelation?: string;
+}

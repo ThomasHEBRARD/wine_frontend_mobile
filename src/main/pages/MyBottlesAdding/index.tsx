@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useState, Fragment } from 'react';
 import { SafeAreaView } from 'react-native';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import bottle from 'services/api/bottles';
-import { BlankBottle, BottleProps } from 'services/type/bottle';
+import { BottleCollectionProps, BottleFilters } from 'services/type/bottle';
 import _ from 'lodash';
+import { useUnicity } from 'services/helpers/useUnicity';
 
 interface SearchableDropdownItemsProps {
     id: string;
@@ -11,38 +12,43 @@ interface SearchableDropdownItemsProps {
 }
 
 const MyBottlesAdding = () => {
-    const [bottleData, setBottleData] = useState<BottleProps>();
-    const [bottleSearch, setBottleSearch] = useState<BottleProps>(BlankBottle);
-    const [foundBottles, setFoundBottles] = useState<BottleProps[]>([]);
+    // const [bottleData, setBottleData] = useState<BottleCollectionProps>();
+    const [bottleFilters, setBottleFilters] = useState<BottleFilters>({ limit: 20, offset: 0 });
+    const [bottleSearch, setBottleSearch] = useState<{ search: string | number }>({ search: '' });
+    const [foundBottles, setFoundBottles] = useState<BottleCollectionProps[]>([]);
 
     const debouncedSearchCall = useCallback(
         _.debounce(async () => {
-            if (bottleSearch?.name) {
-                const response = await bottle.searchBottleForAdding({ search: bottleSearch.name });
-                setFoundBottles(response?.results);
-            }
-        }, 100),
-        [bottleSearch?.name]
+            const searchData = await bottle.searchBottleForAdding(bottleSearch);
+            setFoundBottles(searchData?.results);
+        }, 500),
+        [bottleSearch]
     );
 
     useEffect(() => {
-        bottleSearch && debouncedSearchCall();
+        debouncedSearchCall();
         return debouncedSearchCall.cancel;
-    }, [bottleSearch?.name, debouncedSearchCall]);
+    }, [bottleSearch]);
 
     return (
         <SafeAreaView>
             <Fragment>
                 <SearchableDropdown
-                    onItemSelect={(item: SearchableDropdownItemsProps) =>
-                        setBottleData(
-                            foundBottles.find((bottle: BottleProps) => bottle.id === item.id)
-                        )
+                    resetValue={false}
+                    onItemSelect={async (item: SearchableDropdownItemsProps) => {
+                        setBottleFilters({ ...bottleFilters, name: item.name });
+                        const data = await bottle.searchBottleForAdding({
+                            ...bottleFilters,
+                            name: item.name,
+                        });
+                        setFoundBottles(data?.results);
+                    }}
+                    items={
+                        useUnicity(foundBottles, 'name')?.map((bottle: BottleCollectionProps) => ({
+                            id: bottle.id,
+                            name: bottle.name,
+                        })) ?? []
                     }
-                    items={foundBottles?.map((bottle: BottleProps) => ({
-                        id: bottle.id,
-                        name: bottle.name,
-                    }))}
                     itemStyle={{
                         padding: 3,
                         marginTop: 2,
@@ -51,13 +57,13 @@ const MyBottlesAdding = () => {
                         borderWidth: 1,
                         borderRadius: 5,
                     }}
-                    containerStyle={{ padding: 5 }}
-                    itemTextStyle={{ color: '#222' }}
                     listProps={{ nestedScrollEnabled: true }}
                     textInputProps={{
+                        value: bottleFilters?.name,
                         placeholder: 'Name',
                         onTextChange: (newText: string) => {
-                            setBottleSearch({ ...bottleSearch, name: newText });
+                            setBottleFilters({ ...bottleFilters, name: newText });
+                            setBottleSearch({ search: newText });
                         },
                         autoCompleteType: 'off',
                         autoCapitalize: 'none',
@@ -65,17 +71,22 @@ const MyBottlesAdding = () => {
                     }}
                 />
                 <SearchableDropdown
-                    onItemSelect={(item: SearchableDropdownItemsProps) =>
-                        setBottleData(
-                            foundBottles.find(
-                                (bottle: BottleProps) => bottle.millesime.toString() === item.name
-                            )
-                        )
+                    onItemSelect={async (item: SearchableDropdownItemsProps) => {
+                        setBottleFilters({ ...bottleFilters, millesime: Number(item.name) });
+                        const data = await bottle.searchBottleForAdding({
+                            ...bottleFilters,
+                            name: item.name,
+                        });
+                        setFoundBottles(data?.results);
+                    }}
+                    items={
+                        useUnicity(foundBottles, 'millesime')?.map(
+                            (bottle: BottleCollectionProps) => ({
+                                id: bottle.id,
+                                name: bottle.millesime?.toString(),
+                            })
+                        ) ?? []
                     }
-                    items={foundBottles?.map((bottle: BottleProps) => ({
-                        id: bottle.id,
-                        name: bottle.millesime.toString(),
-                    }))}
                     itemStyle={{
                         padding: 3,
                         marginTop: 2,
@@ -84,12 +95,12 @@ const MyBottlesAdding = () => {
                         borderWidth: 1,
                         borderRadius: 5,
                     }}
-                    containerStyle={{ padding: 5 }}
-                    itemTextStyle={{ color: '#222' }}
                     textInputProps={{
                         placeholder: 'Millesime',
+                        value: bottleFilters?.millesime,
                         onTextChange: (newNumber: number) => {
-                            setBottleSearch({ ...bottleSearch, millesime: newNumber });
+                            setBottleFilters({ ...bottleFilters, millesime: newNumber });
+                            setBottleSearch({ search: newNumber });
                         },
                         autoCompleteType: 'off',
                         autoCapitalize: 'none',
