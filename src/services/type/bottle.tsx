@@ -12,6 +12,7 @@ export interface BottleProps extends BottleCollectionProps {
 export interface BottleFilters {
     limit: number;
     offset: number;
+    id?: number;
     name?: string;
     millesime?: number;
     appelation?: string;

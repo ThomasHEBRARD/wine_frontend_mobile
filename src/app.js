@@ -113,9 +113,9 @@ const LoginRoute = () => {
         {
             initialRouteName: 'LOGIN',
             children: <SafeAreaView>children</SafeAreaView>,
-            headerMode: 'screen',
             screenOptions: {
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                headerMode: 'screen',
                 cardStyle: { backgroundColor: 'white' },
             },
         },

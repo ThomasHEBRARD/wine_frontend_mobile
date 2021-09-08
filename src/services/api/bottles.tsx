@@ -11,6 +11,7 @@ class Bottles extends ApiClient {
             bottles: '/bottles/',
             removeBottles: '/bottles/remove_bottles/',
             searchBottleForAdding: '/bottle_collection/',
+            addBottle: '/bottles/add_bottle/',
         };
     }
 
@@ -46,6 +47,18 @@ class Bottles extends ApiClient {
     ): Promise<DataBottleProps> => {
         const response = await axios.get(this.url('searchBottleForAdding'), {
             params,
+            headers: getHeaders(),
+            cancelToken,
+        });
+
+        return response.data;
+    };
+
+    public addBottle = async (
+        params: { chosenBottleId: number; stockToAdd: number },
+        cancelToken?: CancelToken
+    ): Promise<DataBottleProps> => {
+        const response = await axios.post(this.url('addBottle'), params, {
             headers: getHeaders(),
             cancelToken,
         });

@@ -1,7 +1,4 @@
 {
-    "expo": {
-        "name": "WineApp",
-        "slug": "WineApp",
-        "orientation": "portrait"
-    }
+    "name": "wine_frontend_mobile",
+    "displayName": "wine_frontend_mobile"
 }
