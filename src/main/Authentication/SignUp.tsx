@@ -17,7 +17,7 @@ const SignUp = () => {
         const reponse = await loginClient.signUp({
             first_name: data.firstName,
             last_name: data.lastName,
-            email: data.email,
+            email: data.email.toLowerCase(),
             password: data.password,
         });
         const action = { type: 'SIGN_UP', value: reponse.userToken };
