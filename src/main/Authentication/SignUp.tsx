@@ -64,7 +64,9 @@ const SignUp = () => {
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 value={data.email}
-                onChangeText={(newText: string) => setData({ ...data, email: newText })}
+                onChangeText={(newText: string) =>
+                    setData({ ...data, email: newText.toLowerCase() })
+                }
             />
             <View style={{ height: '5%' }}></View>
             <PasswordInput
