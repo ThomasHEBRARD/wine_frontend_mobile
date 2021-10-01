@@ -14,13 +14,14 @@ const SignUp = () => {
     const navigation = useNavigation();
 
     const signUp = async (data: SignUpProps) => {
-        const reponse = await loginClient.signUp({
+        const em = data.email.toLowerCase();
+        const response = await loginClient.signUp({
             first_name: data.firstName,
             last_name: data.lastName,
-            email: data.email.toLowerCase(),
+            email: em,
             password: data.password,
         });
-        const action = { type: 'SIGN_UP', value: reponse.userToken };
+        const action = { type: 'SIGN_UP', value: response.token };
         dispatch(action);
         navigation.navigate('MainRoute');
     };
