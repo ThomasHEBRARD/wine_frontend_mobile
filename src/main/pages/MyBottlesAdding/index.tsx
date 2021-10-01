@@ -33,7 +33,7 @@ const MyBottlesAdding = () => {
         return debouncedSearchCall.cancel;
     }, [bottleSearch, debouncedSearchCall]);
 
-    const entries = ['name', 'millesime', 'appelation', 'cepage'];
+    const entries = ['name', 'vintage', 'appellation', 'cepage'];
 
     return (
         <SafeAreaView>
@@ -53,10 +53,10 @@ const MyBottlesAdding = () => {
                 ))}
                 <DropDownPicker
                     items={
-                        useUnicity(foundBottles, 'millesime')?.map(
+                        useUnicity(foundBottles, 'vintage')?.map(
                             (bottle: BottleCollectionProps) => ({
                                 id: bottle.id,
-                                name: bottle.millesime?.toString(),
+                                name: bottle.vintage?.toString(),
                             })
                         ) ?? []
                     }

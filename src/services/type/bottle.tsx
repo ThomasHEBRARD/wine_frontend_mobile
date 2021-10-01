@@ -2,7 +2,7 @@ export interface BottleCollectionProps {
     id: number;
     name: string;
     code: string;
-    millesime?: number;
+    vintage?: number;
 }
 
 export interface BottleProps extends BottleCollectionProps {
@@ -14,6 +14,6 @@ export interface BottleFilters {
     offset: number;
     id?: number;
     name?: string;
-    millesime?: number;
-    appelation?: string;
+    vintage?: number;
+    appellation?: string;
 }
