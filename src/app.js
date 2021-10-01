@@ -38,9 +38,10 @@ import OnBoarding from './main/OnBoarding';
 const MainRoute = () => {
     const { Navigator, Screen } = createStackNavigator();
     return $(
-        Navigator, {
+        Navigator,
+        {
             initialRouteName: 'MyCellar',
-            children: < SafeAreaView > children < /SafeAreaView>,
+            children: <SafeAreaView> children </SafeAreaView>,
             screenOptions: {
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 cardStyle: { backgroundColor: 'white' },
@@ -88,9 +89,10 @@ const MainRoute = () => {
 const BottomTabRoute = () => {
     const { Navigator, Screen } = createBottomTabNavigator();
     return $(
-        Navigator, {
+        Navigator,
+        {
             initialRouteName: 'CELLAR',
-            children: < SafeAreaView > children < /SafeAreaView>,
+            children: <SafeAreaView> children </SafeAreaView>,
             tabBar: TabBar,
         },
         $(Screen, {
@@ -107,9 +109,10 @@ const BottomTabRoute = () => {
 const LoginRoute = () => {
     const { Navigator, Screen } = createStackNavigator();
     return $(
-        Navigator, {
+        Navigator,
+        {
             initialRouteName: 'LOGIN',
-            children: < SafeAreaView > children < /SafeAreaView>,
+            children: <SafeAreaView> children </SafeAreaView>,
             screenOptions: {
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 headerMode: 'screen',
@@ -137,18 +140,21 @@ const App = () => {
     const [initialState] = React.useState();
 
     return $(
-        Provider, { store: Store },
+        Provider,
+        { store: Store },
         $(
-            NavigationContainer, {
+            NavigationContainer,
+            {
                 initialState,
                 ref,
-                theme: {...DefaultTheme, colors: {...DefaultTheme.colors, background: 'white' } },
-                children: < > < />,
+                theme: { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: 'white' } },
+                children: <> </>,
             },
             $(
-                Navigator, {
+                Navigator,
+                {
                     initialRouteName: 'OnBoarding',
-                    children: < > < />,
+                    children: <> </>,
                     screenOptions: {
                         headerShown: false,
                     },
