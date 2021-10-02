@@ -94,6 +94,9 @@ const BottomTabRoute = () => {
             initialRouteName: 'CELLAR',
             children: <SafeAreaView> children </SafeAreaView>,
             tabBar: TabBar,
+            screenOptions: {
+                headerShown: false,
+            },
         },
         $(Screen, {
             name: 'CELLAR',
