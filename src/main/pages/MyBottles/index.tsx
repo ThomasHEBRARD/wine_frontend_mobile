@@ -12,6 +12,7 @@ const MyBottles = () => {
         const fetchData = async () => {
             const data = await Bottles.getBottles({ search });
             setBottles(data?.results);
+            console.log(data?.results);
         };
         fetchData();
     }, [search]);

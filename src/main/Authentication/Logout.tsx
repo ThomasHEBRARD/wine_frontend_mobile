@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView, TouchableHighlight } from 'react-native';
+import { SafeAreaView, Text, TouchableHighlight } from 'react-native';
 import loginClient from 'services/api/authentication';
 import { SVG_ICON } from 'svg/enum';
 import SvgIcon from 'svg/svgIcon';
@@ -21,7 +21,10 @@ const Logout = () => {
     return (
         <SafeAreaView>
             <TouchableHighlight underlayColor={'red'} onPress={signOut}>
-                <SvgIcon icon={SVG_ICON.PROFILE} />
+                <>
+                    <SvgIcon icon={SVG_ICON.PROFILE} />
+                    <Text>Logout</Text>
+                </>
             </TouchableHighlight>
         </SafeAreaView>
     );
